@@ -16,12 +16,12 @@ print("\n--- FREKUENSI KATEGORIKAL ---")
 print(df[categorical].apply(pd.Series.value_counts).fillna(0))
 
 print("--- STATISTIK NUMERIK ---")
-print(f"\nJumlah Data (not null) - COUNT: {df[numeric].count()}")
-print(f"\nRata-rata - MEAN: {df[numeric].mean()}")
-print(f"\nStandar Deviasi - STD DEV: {df[numeric].std()}")
-print(f"\nNilai Terendah - MIN: {df[numeric].min()}")
-print(f"\nNilai Tengah - MEDIAN: {df[numeric].median()}")
-print(f"\nNilai Tertinggi - MAX: {df[numeric].max()}")
+print(f"\nJumlah Data (not null) - COUNT:\n {df[numeric].count()}")
+print(f"\nRata-rata - MEAN\n {df[numeric].mean()}")
+print(f"\nStandar Deviasi - STD DEV:\n {df[numeric].std()}")
+print(f"\nNilai Terendah - MIN:\n {df[numeric].min()}")
+print(f"\nNilai Tengah - MEDIAN:\n {df[numeric].median()}")
+print(f"\nNilai Tertinggi - MAX:\n {df[numeric].max()}")
 print("=" *40)
 
 # 3. visualisasi keseluruhan data
@@ -47,6 +47,9 @@ sns.catplot(
 plt.suptitle("Boxplot Numerik Berdasarkan Diagnosis", y=1.02, fontsize=16)
 plt.savefig('visualitation/Boxplot_Diagnosis.png')
 
+print("\n--- RATA-RATA BERDASARKAN DIAGNOSE ---")
+print(df.groupby('Diagnose')[numeric].mean().T)
+
 # 4. pengujian korelasui Pearson
 print("\n--- KORELASI PEARSON ---")
 corr_matrix = df[numeric].corr(method='pearson')
@@ -70,6 +73,6 @@ IQR = Q3 - Q1
 bawah = Q1 - 1.5 * IQR
 atas = Q3 + 1.5 * IQR
 
-outlier = (df[numeric] >= bawah) & (df[numeric] <= atas)
+outlier = (df[numeric] < bawah) | (df[numeric] > atas)
 outlier_counts = outlier.groupby(df['Diagnose']).sum()
 print(outlier_counts)

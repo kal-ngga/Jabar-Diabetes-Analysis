@@ -4,7 +4,7 @@ df = pd.read_csv('dataset/Dataset TA1.csv')
 
 # 1. iformasi dan kondisi awal data
 print(f"Total baris awal: {df.shape[0]}")
-print("\njumlah data yang tidak null:")
+print(f"informasi data & kolom:")
 print(df.info())
 print("-" *40)
 print("\njumlah data yang null:")
