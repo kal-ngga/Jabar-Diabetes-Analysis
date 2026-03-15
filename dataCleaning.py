@@ -13,6 +13,12 @@ print()
 print("=" *40)
 
 df_clean = df.dropna()
+print(f"Total baris setelah cleaning: {df_clean.shape[0]}")
+print(f"informasi data & kolom:")
+print(df_clean.info())
+print()
+print("=" *40)
+
 numeric = ['Age', 'Hemoglobin', 'Hematokrit', 'Lekosit', 'Eritrosit', 'Trombosit', 'HbA1c', 'RBG']
 print(f"Total baris setelah drop null: {df_clean.shape[0]}")
 

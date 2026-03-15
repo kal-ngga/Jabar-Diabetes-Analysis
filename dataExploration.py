@@ -6,16 +6,22 @@ import seaborn as sns
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 1000)
 
-df = pd.read_csv('dataset/Dataset_Clean.csv')
+df = pd.read_csv('dataset/Dataset TA1.csv')
+df =  df.dropna()
+print(f"Total baris awal: {df.shape[0]}")
 
 # 2. Pengukuran statistik berdasarkan tipe data
 categorical = ['Gender', 'Diagnose']
 numeric = ['Age', 'Hemoglobin', 'Hematokrit', 'Lekosit', 'Eritrosit', 'Trombosit', 'HbA1c', 'RBG']
 
-print("\n--- FREKUENSI KATEGORIKAL ---")
-print(df[categorical].apply(pd.Series.value_counts).fillna(0))
+print("\n--- STATISTIKA DESKRIPTIF ---")
+jumlah_gender = df['Gender'].value_counts()
+print(jumlah_gender)
 
-print("--- STATISTIK NUMERIK ---")
+jumlah_diagnose = df['Diagnose'].value_counts()
+print(jumlah_diagnose)
+
+print("\n--- STATISTIK NUMERIK ---")
 print(f"\nJumlah Data (not null) - COUNT:\n {df[numeric].count()}")
 print(f"\nRata-rata - MEAN\n {df[numeric].mean()}")
 print(f"\nStandar Deviasi - STD DEV:\n {df[numeric].std()}")
